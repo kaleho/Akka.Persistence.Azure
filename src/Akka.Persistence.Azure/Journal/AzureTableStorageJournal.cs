@@ -216,7 +216,7 @@ namespace Akka.Persistence.Azure.Journal
 #if DEBUG
             _log.Debug("Entering method ReadHighestSequenceNrAsync");
 #endif
-            var sequenceNumberQuery = GenerateHighestSequenceNumberQuery(persistenceId, fromSequenceNr);
+            var sequenceNumberQuery = GenerateHighestSequenceNumberQuery(persistenceId);
             TableQuerySegment<HighestSequenceNrEntry> result = null;
             long seqNo = 0L;
 
@@ -238,7 +238,7 @@ namespace Akka.Persistence.Azure.Journal
             return seqNo;
         }
 
-        private static TableQuery<HighestSequenceNrEntry> GenerateHighestSequenceNumberQuery(string persistenceId, long fromSequenceNr)
+        private static TableQuery<HighestSequenceNrEntry> GenerateHighestSequenceNumberQuery(string persistenceId)
         {
             var filter =
                 TableQuery.CombineFilters(
